@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kodz Fashion Hub — Premium Gen‑Z Fashion</title>
+  <link rel="stylesheet" href="./css/styles.css"/>
+</head>
+<body>
+  <div id="appHeader"></div>
+
+  <main class="container">
+    <section class="hero glass" id="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="glass">
+          <h1>Premium street-luxe drops for India.</h1>
+          <p>Glass UI. Bold fits. Verified UPI orders. Fast admin-managed catalog.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a class="btn primary" href="./shop.html" data-link>Shop Now</a>
+            <a class="btn" href="./offers.html" data-link>Offers Zone</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <h2>Trending Now</h2><div class="hint">Admin-marked trending</div>
+      </div>
+      <div class="grid" id="trendingGrid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <h2>Offers Zone</h2><div class="hint">Discounted picks only</div>
+      </div>
+      <div class="grid" id="offersGrid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <h2>New Arrivals</h2><div class="hint">Latest drops</div>
+      </div>
+      <div class="grid" id="newGrid"></div>
+    </section>
+  </main>
+
+  <div id="appFooter"></div>
+
+  <script type="module" src="./js/home.js"></script>
+</body>
+</html>
