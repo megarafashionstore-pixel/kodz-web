@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Products: public read ONLY if active
+    match /products/{productId} {
+      allow read: if resource.data.active == true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Categories: public read ONLY if enabled
+    match /categories/{categoryId} {
+      allow read: if resource.data.enabled == true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Orders: admin-only (customers use Cloud Functions)
+    match /orders/{orderId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Customers: admin-only
+    match /customers/{phone} {
+      allow read, write: if isAdmin();
+    }
+
+    // Coupons: admin-only
+    match /coupons/{code} {
+      allow read, write: if isAdmin();
+    }
+
+    // Admin allowlist: seed manually in console
+    match /admins/{uid} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // Settings: admin-only
+    match /settings/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
